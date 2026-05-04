@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    background: #1e1e1f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CONTAINER */
+.container {
+    background: #7c2156;
+    border-radius: 20px;
+    width: 800px;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+
+    box-shadow: 
+        0 0 10px #d429b8,
+        0 0 20px #d429b8,
+        0 0 40px #d429b8,
+        0 0 80px #d429b8;
+
+    border: 2px solid rgba(118, 39, 121, 0.5);
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top: 0; right: 0; bottom: 0; left: 0; */
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(120deg, #d429b8, #974190, #d429b8);
+    -webkit-mask: /* masque pour créer une bordure transparente */
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; 
+    mask-composite: exclude; 
+    opacity: 0.6;
+}
+
+/* FORM */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transition: all 0.6s ease-in-out;
+}
+
+form {
+    background: #352333;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    height: 100%;
+    justify-content: center;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #8d8d8d;
+}
+
+/* BOUTONS */
+button {
+    background: linear-gradient(45deg, #974190, #974190);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #d429b8;
+    transition: all 0.3s ease;
+    color: white;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+/* HOVER bouton */
+button:hover {
+    transform: scale(1.05); /*  agrandissement */
+    box-shadow: 
+        0 0 10px #d429b8,
+        0 0 20px #d429b8,
+        0 0 40px #d429b8;
+}
+
+/* LOGIN POSITION */
+.sign-in-container {
+    left: 0;
+    z-index: 2;
+    pointer-events: all; /* <-- LOGIN cliquable */
+}
+
+/* SIGNUP POSITION */
+.sign-up-container {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none; /* <-- empêche le bloc invisible de bloquer la souris */
+}
+
+/* OVERLAY */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.6s;
+    z-index: 100;
+}
+
+.overlay {
+    background: linear-gradient(135deg, #942b6c, #993773);
+    height: 100%;
+    width: 200%;
+    position: relative;
+    left: -100%;
+    transition: 0.6s;
+}
+
+/* PANELS */
+.overlay-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.overlay-left {
+    left: 0;
+}
+
+.overlay-right {
+    right: 0;
+}
+
+.ghost {
+    background: linear-gradient(45deg, #974190, #974190);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #d429b8;
+    transition: all 0.3s ease;
+    color: white;
+    height: 40px;
+    width: 150px;
+}
+
+.ghost:hover {
+    transform: scale(1.05); /* <-- agrandit aussi les boutons rose */
+}
+
+/* ANIMATION ACTIVE */
+.container.active .sign-in-container {
+    transform: translateX(100%);
+    pointer-events: none; /* < quand Login disparaît, il ne capte plus la souris */
+}
+
+.container.active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    pointer-events: all; /*  Sign Up devient cliquable */
+}
+
+.container.active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.container.active .overlay {
+    transform: translateX(50%);
+}
+
+h1 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+#signUp {
+    background: linear-gradient(45deg, #974190, #974190);
+    border-radius: 20px;
+    box-shadow: 0 0 10px #d429b8;
+    transition: all 0.3s ease;
+    color: white;
+    height: 40px;
+}
+
+

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Planoria</title>
+<link rel="stylesheet" href="styleCss2.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+
+
+<div id="editModal" class="edit-modal">
+  <div class="edit-content">
+
+    <span class="close-edit">&times;</span>
+
+    <h2>Edit Event</h2>
+
+    <input type="text" id="editTitle" placeholder="Title">
+    <input type="text" id="editLocation" placeholder="Location">
+    <input type="text" id="editCategory" placeholder="Category">
+    <input type="text" id="editDate" placeholder="Date">
+    
+    <button id="saveEdit">Save Changes</button>
+
+  </div>
+</div>
+
+   
+
+
+
+
+
+
+
+
+<body>
+// Navbar
+
+<header class="navbar">
+    <div class="logo">
+       <img src="logo2.png" alt="logo">
+       <span>Planoria</span>
+    </div>
+
+    <nav class="nav-center">
+        <a href="#info">Services</a>
+        <a href="#events">See Events</a>
+        <a href="#footer">Contact us</a>
+    </nav>
+
+    <div class="login-btn">
+        <a href="avantLogin.html"><button>Logout</button></a>
+    </div>
+</header>
+
+<section class="hero">
+
+    <div class="overlay-content">
+        <h1>Discover our platform<br> to optimize your <br>campus events!</h1>
+        <br>
+        
+        <a href="#info">
+          <button class="btn"><strong>Read More</strong></button>
+        </a>
+    </div>
+
+    <div class="cards">
+        <a href="https://www.inside.unsw.edu.au/campus-life/unsw-buzzing-our-biggest-o-week-yet" class="event-link">
+            <div class="card">
+                <h3 class="card-title">orientation week</h3>
+                <div class="img-box">
+                    <img src="oweek.jpg" alt="">
+                </div>
+                <p class="card-link">take a look  </p>
+            </div>
+        </a>
+        <a href="https://w3.bilkent.edu.tr/bilkent">    
+        <div class="card" >
+            <h3 class="card-title">spring festivals</h3>
+            <div class="img-box">
+                <img src="festival.jpg" alt="">
+            </div>
+            <p class="card-link">take a look</p>
+        </div>
+        </a>
+    </div>
+
+</section>
+
+
+
+/* MODAL FORMULAIRE */
+<div id="eventModal" class="modal">
+  <div class="modal-content">
+    
+    <span class="close">&times;</span>
+
+    <div class="form-header">
+        <p class="mini-tag">Create new event</p>
+        <h2>Ajouter un événement</h2>
+        <p class="form-subtitle">
+            Remplis les informations ci-dessous pour publier un nouvel événement sur Planoria.
+        </p>
+    </div>
+
+    <form id="eventForm">
+
+        <div class="input-group">
+            <label for="title">Titre de l'événement</label>
+            <input type="text" id="title" name="title" placeholder="Ex: Hackathon 2026" required>
+        </div>
+
+        <div class="row-2">
+            <div class="input-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="input-group">
+                <label for="time">Heure</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="location">Lieu</label>
+            <input type="text" id="location" name="location" placeholder="Ex: Auditorium B" required>
+        </div>
+
+        <div class="row-2">
+            <div class="input-group">
+                <label for="category">Catégorie</label>
+                <select id="category" name="category" required>
+                    <option value="">Choisir...</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Business">Business</option>
+                    <option value="Music">Music</option>
+                    <option value="Gaming">Gaming</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="slots">Places</label>
+                <input type="number" id="slots" name="slots" min="1" placeholder="Ex: 25" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="image">Image de l'événement</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <div class="input-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="5" placeholder="Décris ton événement..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-event-btn">✨ Ajouter l'événement</button>
+    </form>
+  </div>
+</div>
+
+/* EVENTS */
+<section class="events" id="events">
+
+    <h2>Upcoming Events</h2>
+    <p class="subtitle">
+        Browse technical, cultural, and sports events. Explore the ones that interest you!
+    </p>
+
+    <div class="events-container" id="eventsContainer">
+
+        <!-- CARTE AJOUT -->
+        <div class="event-card add-event-card" id="openAddCard">
+            <div class="add-event-inner">
+                <div class="plus-icon">+</div>
+                <h3>Ajouter un événement</h3>
+                <p>Clique ici pour créer une nouvelle carte</p>
+                <button class="register add-btn" id="openAddBtn">Ajouter</button>
+            </div>
+        </div>
+
+        <!-- CARD 1 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="ia.jpg" alt="AI Workshop">
+                <span class="badge">30 slots left</span>
+                <span class="heart">♡</span>
+            </div>
+
+            <h3>AI & Machine Learning Workshop</h3>
+            <p>📍 Auditorium A</p>
+            <p>💻 Computer Science</p>
+            <p>📅 November 15 @ 9:00 AM</p>
+
+            <div class="card-actions">
+              <button class="register edit-btn">change it</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="images.jpg" alt="Dance Night">
+                <span class="badge full">Full</span>
+                <span class="heart">♡</span>
+            </div>
+
+            <h3>Cultural Dance Night</h3>
+            <p>📍 Main Hall</p>
+            <p>🎨 Arts</p>
+            <p>📅 November 20 @ 6:00 PM</p>
+
+            <div class="card-actions">
+              <button class="register edit-btn">change it</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+            
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="foot.jpg" alt="Football">
+                <span class="badge">12 slots left</span>
+                <span class="heart">♡</span>
+            </div>
+
+            <h3>Interdepartment Football Tournament</h3>
+            <p>📍 College Stadium</p>
+            <p>⚽ Sports</p>
+            <p>📅 November 25 @ 4:00 PM</p>
+
+            <div class="card-actions">
+                <button class="register edit-btn">change it</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+
+        <!-- EVENT 4 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="pitch.jpg" alt="Pitch">
+                <span class="badge">20 slots left</span>
+                <span class="heart">♡</span>
+            </div>
+            <h3>Startup Pitch Competition</h3>
+            <p>📍 Innovation Lab</p>
+            <p>💼 Business</p>
+            <p>📅 December 1 @ 2:00 PM</p>
+            <div class="card-actions">
+                 <button class="register edit-btn">change it</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+
+        <!-- EVENT 6 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="music.jpeg" alt="Music Festival">
+                <span class="badge full">Full</span>
+                <span class="heart">♡</span>
+            </div>
+            <h3>Music Festival</h3>
+            <p>📍 Campus Arena</p>
+            <p>🎵 Music</p>
+            <p>📅 December 5 @ 8:00 PM</p>
+            <div class="card-actions">
+              <button class="register edit-btn">change it</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+
+        <!-- EVENT 7 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="web.jpg" alt="Web Bootcamp">
+                <span class="badge">15 slots left</span>
+                <span class="heart">♡</span>
+            </div>
+            <h3>Web Development Bootcamp</h3>
+            <p>📍 Lab 2</p>
+            <p>💻 Tech</p>
+            <p>📅 December 7 @ 9:00 AM</p>
+            <div class="card-actions">
+                  <button class="register edit-btn">change it</button>
+                  <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+
+        <!-- EVENT 8 -->
+        <div class="event-card">
+            <div class="image">
+                <img src="gaming.webp" alt="Gaming Tournament">
+                <span class="badge">8 slots left</span>
+                <span class="heart">♡</span>
+            </div>
+            <h3>Gaming Tournament</h3>
+            <p>📍 E-Sports Room</p>
+            <p>🎮 Gaming</p>
+            <p>📅 December 10 @ 6:00 PM</p>
+            <div class="card-actions">
+               <button class="register edit-btn">change it</button>
+               <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="info-section" id="info">
+
+    <h2 class="section-title">Services tailored to your needs</h2>
+    <p class="section-subtitle">
+        Discover a range of services designed to make your events unforgettable.
+    </p>
+
+    <div class="info-block">
+        <div class="info-img">
+            <img src="img10.png" alt="">
+        </div>
+        <div class="info-text">
+            <h3>Simplified Management</h3>
+            <p>
+                Planoria helps you centralize all event-related information,
+                making coordination and communication easier than ever.
+            </p>
+        </div>
+    </div>
+
+    <div class="info-block reverse">
+        <div class="info-img">
+            <img src="img11.png" alt="">
+        </div>
+        <div class="info-text">
+            <h3>Collaborative Tools</h3>
+            <p>
+                Collaborate in real time with your team using our integrated tools,
+                improving planning efficiency and productivity.
+            </p>
+        </div>
+    </div>
+
+    <div class="info-block">
+        <div class="info-img">
+            <img src="img12.png" alt="">
+        </div>
+        <div class="info-text">
+            <h3>Event Planning</h3>
+            <p>
+                We support you from concept to execution, providing the right tools
+                for every stage of your event.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<footer class="footer" id="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h2 class="logo">planoria</h2>
+            <p>
+                Stay connected with the latest updates, event highlights,
+                and exclusive announcements. Join us in creating unforgettable moments.
+            </p>
+
+            <div class="socials">
+                <span>🐦</span>
+                <span>📘</span>
+                <span>▶️</span>
+                <span>📸</span>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Services Links</h3>
+            <ul>
+                <li>Home</li>
+                <li>Events</li>
+                <li>Gallery</li>
+                <li>Contact</li>
+                <li>About</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Information</h3>
+            <p>📞 9700-121-3637</p>
+            <p>✉️ needhelp@company.com</p>
+            <p>📍 @ph</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>Newsletter</h3>
+            <p>
+                Subscribe to get the latest event updates,
+                special offers, and exclusive invitations.
+            </p>
+
+            <div class="newsletter">
+                <input type="email" placeholder="Email Address">
+                <button>➤</button>
+            </div>
+
+            <label class="checkbox">
+                <input type="checkbox"> I agree to all terms and policies
+            </label>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © Copyright 2026 - Planoria
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
